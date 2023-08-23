@@ -2,7 +2,7 @@
 
 Sets up a Corosync v3 QNet Daemon for use with Proxmox.
 
-[Docker Hub](https://hub.docker.com/r/modelrockettier/corosync-qnetd)
+[Docker Hub](https://hub.docker.com/r/quiknick/corosync-qnetd)
 
 This allows you to deploy an external voter on a server that is not running Proxmox (e.g. a NAS).
 The external voter mainly serves to break ties (e.g. if the cluster has an even number of nodes).
@@ -59,13 +59,13 @@ directly transfer files (e.g. via scp) between it and the docker host will make 
 
 1. **\[docker\]** Pull the docker corosync-qnetd container (or build it from this repo)
    ```
-   docker pull modelrockettier/corosync-qnetd
+   docker pull quiknick/corosync-qnetd
    ```
 
 2. **\[docker\]** Create and start the docker corosync-qnetd container:
    ```
    docker run -d --name=qnetd --cap-drop=ALL -p 5403:5403 \
-      -v ${QNETD_DATA}:/etc/corosync modelrockettier/corosync-qnetd
+      -v ${QNETD_DATA}:/etc/corosync quiknick/corosync-qnetd
    ```
 
 3. **\[docker\]** Copy the QNetd CA certificate to the first Proxmox node:
@@ -239,7 +239,7 @@ appropriate values in the commands below):
 3. On the docker host, create and start the docker corosync-qnetd container:
    ```
    docker run -d --name=qnetd --cap-drop=ALL -p 5403:5403 \
-      -v /etc/corosync:/etc/corosync modelrockettier/corosync-qnetd
+      -v /etc/corosync:/etc/corosync quiknick/corosync-qnetd
    ```
     * NOTE: The corosync-qnetd data **must** be stored in `/etc/corosync` on the docker host.
 

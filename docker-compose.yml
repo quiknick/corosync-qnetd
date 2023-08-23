@@ -1,0 +1,23 @@
+version: '2.1'
+
+services:
+  pbs:
+    environment:
+      TZ: America/New_York
+    image: quiknick/corosync-qnetd:latest
+    container_name: qnetd
+    hostname: qnetd
+    network_mode: host
+    mem_limit: 512M
+    volumes:
+      - qnetd_etc:/etc/corosync
+    restart: unless-stopped
+    stop_signal: SIGHUP
+
+volumes:
+  qnetd_etc:
+    driver: local
+    driver_opts:
+      type: ''
+      o: bind
+      device: /volume1/qnetd/etc/corosync

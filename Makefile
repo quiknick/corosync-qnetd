@@ -1,7 +1,10 @@
-.PHONY: build
+.PHONY: build push
 
-ARGS ?= -t corosync-qnetd:latest
+TAG ?= quiknick/corosync-qnetd:latest
 
 build:
-	docker pull debian:buster-slim
-	docker build $(ARGS) .
+	docker pull debian:bullseye-slim
+	docker build -t $(TAG) .
+
+push:
+    docker push $(TAG)
